@@ -1,0 +1,13 @@
+[Unit]
+Description="definir o gateway padrao para ipv6 e rodar o comando dhclient"
+after=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ip -6 route add default via fe80::be24:11ff:fec4:b0bb dev eth0
+Execstart=/usr/sbin/dhclient -r -6
+ExecStart=/usr/sbin/dhclient -6
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
